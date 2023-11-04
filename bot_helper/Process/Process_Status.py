@@ -154,7 +154,6 @@ def ffmpeg_status_foot(status, user_id, start_time, time_in_us):
 else:
     status_foot+= "**ETA Size**: N/A (Division by zero prevented due to invalid input)"
 
-
 def generate_ffmpeg_status_head(user_id, pmode, input_size):
         if pmode==Names.compress:
                 if get_data()[user_id]['compress']['use_queue_size']:
