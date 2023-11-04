@@ -212,10 +212,10 @@ class FFMPEG:
                 cmd_meta = ["ffmpeg", "-i", f"{dl_loc}", f"-metadata", f"title={custom_metadata_title}", "-metadata:s:a", f"title={custom_metadata_title}", "-metadata:s:s", f"title={custom_metadata_title}", "-map", "0", "-c", "copy", '-y', f"{output_meta}"]
                 met_result = await run_process_command(cmd_meta)
                 if not met_result:
-                        cmd_meta = ["ffmpeg", "-i", f"{dl_loc}", f"-metadata:s:a", f"title={custom_metadata_title}", "-map", "0", "-c", "copy", '-y', f"{output_meta}"]
+                        cmd_meta = ["ffmpeg", "-i", f"{dl_loc}", f"-metadata", f"title={custom_metadata_title}", f"-metadata:s:a", f"title={custom_metadata_title}", "-map", "0", "-c", "copy", '-y', f"{output_meta}"]
                         met_result = await run_process_command(cmd_meta)
                 if not met_result:
-                        cmd_meta = ["ffmpeg", "-i", f"{dl_loc}", f"-metadata:s:s", f"title={custom_metadata_title}", "-map", "0", "-c", "copy", '-y', f"{output_meta}"]
+                        cmd_meta = ["ffmpeg", "-i", f"{dl_loc}", f"-metadata", f"title={custom_metadata_title}", f"-metadata:s:s", f"title={custom_metadata_title}", "-map", "0", "-c", "copy", '-y', f"{output_meta}"]
                         met_result = await run_process_command(cmd_meta)
                 if met_result:
                         await process_status.event.reply(f"✅Metadata Set Successfully")
