@@ -150,10 +150,9 @@ def ffmpeg_status_foot(status, user_id, start_time, time_in_us):
                 else:
                         status_foot+= " | "
                 if status.output_size() != 0 and time_in_us != 0 and status.duration != 0:
-    status_foot += f"**ETA Size**: {str(get_human_size((status.output_size() / time_in_us) * status.duration * 1024 * 1024))}"
+    status_foot+= f"**ETA Size**: {str(get_human_size((status.output_size()/time_in_us)*status.duration*1024*1024))}"
 else:
-    # Handle the case where one of the values is zero to avoid division by zero
-    status_foot += "**ETA Size**: N/A (Division by zero prevented)"
+    status_foot+= "**ETA Size**: N/A (Division by zero prevented due to invalid input)"
 
 
 def generate_ffmpeg_status_head(user_id, pmode, input_size):
