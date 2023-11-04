@@ -141,16 +141,24 @@ def get_progress_bar_string(current,total):
 
 
 def ffmpeg_status_foot(status, user_id, start_time, time_in_us):
-        status_foot = ""
-        if get_data()[user_id]['ffmpeg_ptime']:
-                status_foot+= f"\n**P.Time**: {get_readable_time(time()-start_time)}"
-        if get_data()[user_id]['ffmpeg_size']:
-                if status_foot=="":
-                        status_foot+= "\n"
-                else:
-                        status_foot+= " | "
-                status_foot+= f"**ETA Size**: {str(get_human_size((status.output_size()/time_in_us)*status.duration*1024*1024))}"
-        return status_foot
+    status_foot = ""
+    if get_data()[user_id]['ffmpeg_ptime']:
+        status_foot += f"\n**P.Time**: {get_readable_time(time() - start_time)}"
+    if get_data()[user_id]['ffmpeg_size']:
+        if status_foot == "":
+            status_foot += "\n"
+        else:
+            status_foot += " | "
+        if time_in_us != 0:
+            eta_size = (status.output_size() / time_in_us) * status.duration * 1024 * 1024
+            if eta_size != 0:
+                status_foot += f"**ETA Size**: {str(get_human_size(eta_size))}"
+            else:
+                status_foot += "**ETA Size**: N/A (Division by zero prevented due to invalid input)"
+        else:
+            status_foot += "**ETA Size**: N/A (Division by zero prevented due to invalid input)"
+    return status_foot
+
 
 def generate_ffmpeg_status_head(user_id, pmode, input_size):
         if pmode==Names.compress:
